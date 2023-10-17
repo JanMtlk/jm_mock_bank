@@ -1,61 +1,134 @@
 import 'package:flutter/material.dart';
+import 'package:jm_mock_bank/presentation/home_page/home_page_view.dart';
 import 'package:jm_mock_bank/presentation/single_pages/approve_actions_page.dart';
 import 'package:jm_mock_bank/presentation/profile_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/account_card.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/card_card.dart';
+import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/offer_card.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  TabController? _tabController;
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: 5, // Number of tabs
+      vsync: this, // Add a TickerProvider
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController
+        ?.dispose(); // Dispose of the TabController to avoid memory leaks
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: const Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-              child: Icon(Icons.balance_sharp),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("John Tester"),
-                Text(
-                  "Personal Mock Banking",
-                  style: TextStyle(fontSize: 14, color: Colors.white70),
-                ),
-              ],
-            ),
+        appBar: AppBar(
+          centerTitle: false,
+          title: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                child: Icon(Icons.balance_sharp),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("John Tester"),
+                  Text(
+                    "Personal Mock Banking",
+                    style: TextStyle(fontSize: 14, color: Colors.white70),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ApproveActionsPage()));
+                },
+                icon: const Icon(Icons.key)),
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ProfilePage()));
+                },
+                icon: const Icon(Icons.manage_accounts))
           ],
         ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ApproveActionsPage()));
-              },
-              icon: const Icon(Icons.key)),
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ProfilePage()));
-              },
-              icon: const Icon(Icons.manage_accounts))
-        ],
-      ),
-      body: ListView(
-        children: const [
-          AccountCard(),
-          OfferCard(),
-          CardCard(),
-        ],
-      ),
-    );
+        body: TabBarView(controller: _tabController, children: [
+          const HomePageView(),
+          const Center(
+            child: Text("Calendar"),
+          ),
+          ListView(
+            children: const [
+              AccountCard(),
+              OfferCard(),
+              CardCard(),
+            ],
+          ),
+          ListView(
+            children: const [
+              AccountCard(),
+              OfferCard(),
+              CardCard(),
+            ],
+          ),
+          ListView(
+            children: const [
+              AccountCard(),
+              OfferCard(),
+              CardCard(),
+            ],
+          ),
+        ]),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          selectedItemColor: Colors.purple,
+          type: BottomNavigationBarType.fixed,
+          onTap: (value) {
+            setState(() {
+              // animate tab bar from defaultTab bar to value
+              _currentIndex = value;
+              _tabController?.animateTo(
+                value,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+              );
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.compare_arrows_sharp), label: "Payment"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart_outlined), label: "Offers"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.discount_sharp), label: "JMMB Club"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.more_horiz_sharp), label: "meni"),
+          ],
+        ));
   }
 }

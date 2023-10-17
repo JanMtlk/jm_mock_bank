@@ -25,8 +25,6 @@ class MyApp extends StatelessWidget {
           trackColor: MaterialStateProperty.all(
               const Color.fromARGB(255, 229, 135, 244)),
         ),
-        iconTheme:
-            const IconThemeData(color: Color.fromARGB(255, 194, 46, 221)),
         appBarTheme: const AppBarTheme(
             centerTitle: true,
             backgroundColor: Color.fromARGB(255, 64, 36, 78),
