@@ -6,10 +6,6 @@ import 'package:jm_mock_bank/presentation/home_page_views/offers_view.dart';
 import 'package:jm_mock_bank/presentation/home_page_views/payments_view.dart';
 import 'package:jm_mock_bank/presentation/single_pages/approve_actions_page.dart';
 import 'package:jm_mock_bank/presentation/profile_page.dart';
-import 'package:jm_mock_bank/presentation/ui_widgets/account_card.dart';
-import 'package:jm_mock_bank/presentation/ui_widgets/card_card.dart';
-import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
-import 'package:jm_mock_bank/presentation/ui_widgets/offer_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

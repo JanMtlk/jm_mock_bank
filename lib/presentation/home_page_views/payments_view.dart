@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jm_mock_bank/presentation/single_pages/new_payment_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
+import 'package:jm_mock_bank/presentation/ui_widgets/jmm_forward_icon.dart';
 import 'package:jm_mock_bank/utils/constants.dart';
 
 class PaymentsView extends StatelessWidget {
@@ -60,25 +61,19 @@ class PaymentsView extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.qr_code_2_outlined),
                       title: const Text('QR payment'),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
+                      trailing: const JmmForwardIcon(size: 20),
                       onTap: () {},
                     ),
                     ListTile(
                       leading: const Icon(Icons.description),
                       title: const Text('From Template'),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
+                      trailing: const JmmForwardIcon(size: 20),
                       onTap: () {},
                     ),
                     ListTile(
                       leading: const Icon(Icons.published_with_changes_rounded),
                       title: const Text('To Own Account'),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
+                      trailing: const JmmForwardIcon(size: 20),
                       onTap: () {},
                     ),
                     Padding(
@@ -135,30 +130,22 @@ class PaymentsView extends StatelessWidget {
                     ),
                     ListTile(
                       title: const Text('Create QR code'),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
+                      trailing: const JmmForwardIcon(size: 20),
                       onTap: () {},
                     ),
                     ListTile(
                       title: const Text('JMMB exchage'),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
+                      trailing: const JmmForwardIcon(size: 20),
                       onTap: () {},
                     ),
                     ListTile(
                       title: const Text('Repeated payment'),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
+                      trailing: const JmmForwardIcon(size: 20),
                       onTap: () {},
                     ),
                     ListTile(
                       title: const Text('SEPA payment'),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
+                      trailing: const JmmForwardIcon(size: 20),
                       onTap: () {},
                     ),
                     const SizedBox(

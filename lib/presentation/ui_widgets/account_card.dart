@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
+import 'package:jm_mock_bank/presentation/ui_widgets/jmm_forward_icon.dart';
 import 'package:jm_mock_bank/utils/constants.dart';
 
 class AccountCard extends StatelessWidget {
@@ -158,11 +159,7 @@ class AccountCard extends StatelessWidget {
                                 fontSize: 12, fontWeight: FontWeight.w300),
                           ),
                         ),
-                        Icon(
-                          Icons.keyboard_arrow_right,
-                          size: 30,
-                          color: Colors.purple,
-                        ),
+                        JmmForwardIcon(size: 20)
                       ]),
                 ),
               ),

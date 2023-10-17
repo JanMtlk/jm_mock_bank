@@ -6,6 +6,7 @@ import 'package:jm_mock_bank/presentation/single_pages/meetups_band_page.dart';
 import 'package:jm_mock_bank/presentation/single_pages/my_contact_details_page.dart';
 import 'package:jm_mock_bank/presentation/single_pages/settings_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
+import 'package:jm_mock_bank/presentation/ui_widgets/jmm_forward_icon.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/logout_button.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -45,7 +46,7 @@ class ProfilePage extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.manage_accounts),
                 title: const Text("My Contact Details"),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+                trailing: const JmmForwardIcon(),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -57,7 +58,7 @@ class ProfilePage extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.pause_presentation),
                 title: const Text("My Client Number"),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+                trailing: const JmmForwardIcon(),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -69,7 +70,7 @@ class ProfilePage extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.document_scanner),
                 title: const Text("Documents"),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+                trailing: const JmmForwardIcon(),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -81,7 +82,7 @@ class ProfilePage extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.key),
                 title: const Text("Banking Identity JMMB"),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+                trailing: const JmmForwardIcon(),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -93,7 +94,7 @@ class ProfilePage extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.holiday_village_sharp),
                 title: const Text("Meetups in person"),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+                trailing: const JmmForwardIcon(),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -105,7 +106,7 @@ class ProfilePage extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.settings),
                 title: const Text("App Settings"),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+                trailing: const JmmForwardIcon(),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -125,19 +126,19 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Icon(Icons.fingerprint),
+                        Icon(Icons.chat_outlined),
                         Text("Chat"),
                       ],
                     ),
                     Column(
                       children: [
-                        Icon(Icons.devices_outlined),
+                        Icon(Icons.phone),
                         Text("Call"),
                       ],
                     ),
                     Column(
                       children: [
-                        Icon(Icons.notifications),
+                        Icon(Icons.import_contacts_sharp),
                         Text("Contacts"),
                       ],
                     )
