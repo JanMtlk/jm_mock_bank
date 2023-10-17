@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jm_mock_bank/presentation/home_page_views/club_view.dart';
 import 'package:jm_mock_bank/presentation/home_page_views/home_page_view.dart';
+import 'package:jm_mock_bank/presentation/home_page_views/menu_view.dart';
+import 'package:jm_mock_bank/presentation/home_page_views/offers_view.dart';
+import 'package:jm_mock_bank/presentation/home_page_views/payments_view.dart';
 import 'package:jm_mock_bank/presentation/single_pages/approve_actions_page.dart';
 import 'package:jm_mock_bank/presentation/profile_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/account_card.dart';
@@ -76,33 +80,17 @@ class _HomePageState extends State<HomePage>
                 icon: const Icon(Icons.manage_accounts))
           ],
         ),
-        body: TabBarView(controller: _tabController, children: [
-          const HomePageView(),
-          const Center(
-            child: Text("Calendar"),
-          ),
-          ListView(
+        //Using tab View instead of page view because of the scrolling across multiple pages in the same tab
+        body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _tabController,
             children: const [
-              AccountCard(),
-              OfferCard(),
-              CardCard(),
-            ],
-          ),
-          ListView(
-            children: const [
-              AccountCard(),
-              OfferCard(),
-              CardCard(),
-            ],
-          ),
-          ListView(
-            children: const [
-              AccountCard(),
-              OfferCard(),
-              CardCard(),
-            ],
-          ),
-        ]),
+              HomePageView(),
+              PaymentsView(),
+              OffersView(),
+              ClubView(),
+              MenuView()
+            ]),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           selectedItemColor: Colors.purple,

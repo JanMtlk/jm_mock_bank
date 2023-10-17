@@ -6,6 +6,7 @@ import 'package:jm_mock_bank/presentation/single_pages/meetups_band_page.dart';
 import 'package:jm_mock_bank/presentation/single_pages/my_contact_details_page.dart';
 import 'package:jm_mock_bank/presentation/single_pages/settings_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
+import 'package:jm_mock_bank/presentation/ui_widgets/logout_button.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -115,10 +116,10 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           )),
-          Contained(
+          const Contained(
               child: Column(
             children: [
-              const Contained(
+              Contained(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -143,19 +144,7 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              ElevatedButton(
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.logout),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Log out'),
-                  ],
-                ),
-                onPressed: () {},
-              ),
+              LogoutButton(),
             ],
           ))
         ],

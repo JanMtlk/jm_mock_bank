@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
+import 'package:jm_mock_bank/utils/constants.dart';
 
 class OfferCard extends StatelessWidget {
   const OfferCard({super.key});
@@ -46,8 +47,11 @@ Pay off your loan at any time without any fees.""",
                         children: [
                           ElevatedButton(
                             style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.purple)),
+                              backgroundColor: MaterialStateColor.resolveWith(
+                                  (states) => MyColors.brightPurpleBG),
+                              foregroundColor: MaterialStateColor.resolveWith(
+                                  (states) => MyColors.brightPurpleText),
+                            ),
                             child: const Row(
                               children: [
                                 Text('I am interested'),
