@@ -13,8 +13,27 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'jm mock bank',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.purple),
-      darkTheme: ThemeData.dark(useMaterial3: true),
+      theme: ThemeData(
+          primarySwatch: Colors.purple,
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Color.fromARGB(255, 24, 24, 24))),
+      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+        switchTheme: SwitchThemeData(
+          thumbColor:
+              MaterialStateProperty.all(const Color.fromARGB(255, 59, 2, 69)),
+          trackColor: MaterialStateProperty.all(
+              const Color.fromARGB(255, 229, 135, 244)),
+        ),
+        iconTheme:
+            const IconThemeData(color: Color.fromARGB(255, 194, 46, 221)),
+        appBarTheme: const AppBarTheme(
+            centerTitle: true,
+            backgroundColor: Color.fromARGB(255, 64, 36, 78),
+            shadowColor: Colors.black,
+            elevation: 5),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 26, 21, 28),
+      ),
       themeMode: ThemeMode.dark,
       home: const StartApp(),
     );

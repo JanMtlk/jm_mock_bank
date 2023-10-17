@@ -9,7 +9,6 @@ class ApproveActionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text("JMM Key"),
       ),
       body: BlocBuilder<ApproveActionsBloc, ApproveActionsState>(
