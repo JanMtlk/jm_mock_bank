@@ -1,7 +1,4 @@
-import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
-
-// import 'package:logger/logger.dart';
 
 part 'initial_loading_state.dart';
 
@@ -10,8 +7,10 @@ class InitialLoadingController extends GetxController {
 
   void initialize() async {
     // Logger().i("InitialLoadingController initialized");
+    loadingState = const InitialLoadingLoading();
+    update();
     // Delayed
-    await Future.delayed(const Duration(seconds: 1), () {
+    await Future.delayed(const Duration(milliseconds: 1), () {
       // Logger().i("InitialLoadingController finished");
       loadingState = const InitialLoadingLoaded();
       update();

@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:jm_mock_bank/application/state/approve_actions/approve_actions_controller.dart';
 import 'package:jm_mock_bank/application/state/initial_loading/initial_loading_controller.dart';
 import 'package:jm_mock_bank/application/state/new_payment_controller.dart';
-import 'package:jm_mock_bank/presentation/core/start_app/initial_page.dart';
-// import 'package:logger/logger.dart';
+import 'package:jm_mock_bank/presentation/core/auth/initial_page.dart';
 
 class StartApp extends StatefulWidget {
   const StartApp({super.key});
@@ -34,8 +33,7 @@ initControllers() async {
     ApproveActionsController(),
   );
 
-  final NewPaymentController newPaymentController =
-      Get.put(NewPaymentController());
+  Get.put(NewPaymentController());
   initialLoadingController.initialize();
   approveActionsController.initialize();
 }

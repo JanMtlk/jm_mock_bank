@@ -5,7 +5,8 @@ import 'package:logger/logger.dart';
 part 'auth_state_state.dart';
 
 class AuthStateController extends GetxController {
-  AuthState authState = const AuthStateInitial();
+  AuthState authState = const AuthStateAuthenticated(
+      id: "afasf"); //TODO: change back to this const AuthStateInitial();
   String password = "";
 
   void login({required String password}) async {
