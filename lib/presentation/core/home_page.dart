@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jm_mock_bank/presentation/home_page_views/club_view.dart';
-import 'package:jm_mock_bank/presentation/home_page_views/home_page_view.dart';
-import 'package:jm_mock_bank/presentation/home_page_views/menu_view.dart';
-import 'package:jm_mock_bank/presentation/home_page_views/offers_view.dart';
-import 'package:jm_mock_bank/presentation/home_page_views/payments_view.dart';
+import 'package:jm_mock_bank/presentation/core/home_page_views/club_view.dart';
+import 'package:jm_mock_bank/presentation/core/home_page_views/home_page_view.dart';
+import 'package:jm_mock_bank/presentation/core/home_page_views/menu_view.dart';
+import 'package:jm_mock_bank/presentation/core/home_page_views/offers_view.dart';
+import 'package:jm_mock_bank/presentation/core/home_page_views/payments_view.dart';
 import 'package:jm_mock_bank/presentation/single_pages/approve_actions_page.dart';
 import 'package:jm_mock_bank/presentation/profile_page.dart';
 

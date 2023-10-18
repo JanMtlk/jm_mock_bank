@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jm_mock_bank/application/state/initial_loading/initial_loading_controller.dart';
-import 'package:jm_mock_bank/presentation/login_page.dart';
+import 'package:jm_mock_bank/presentation/core/start_app/login_page.dart';
 import 'package:logger/logger.dart';
 
-class InitialPage extends StatefulWidget {
+class InitialPage extends StatelessWidget {
   const InitialPage({super.key});
 
   @override
-  State<InitialPage> createState() => _InitialPageState();
-}
-
-class _InitialPageState extends State<InitialPage> {
-  final controller = Get.put(InitialLoadingController());
-  @override
   Widget build(BuildContext context) {
     // handle loading of data from storage
-    return GetBuilder<InitialLoadingController>(builder: (_) {
+    return GetBuilder<InitialLoadingController>(builder: (controller) {
       Logger().i("rebuilding with ${controller.loadingState}");
       if (controller.loadingState is InitialLoadingInitial) {
         return const Center(

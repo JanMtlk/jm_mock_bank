@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jm_mock_bank/application/state/approve_actions/approve_actions_controller.dart';
 import 'package:jm_mock_bank/application/state/initial_loading/initial_loading_controller.dart';
-import 'package:jm_mock_bank/presentation/initial_page.dart';
+import 'package:jm_mock_bank/application/state/new_payment_controller.dart';
+import 'package:jm_mock_bank/presentation/core/start_app/initial_page.dart';
 // import 'package:logger/logger.dart';
 
 class StartApp extends StatefulWidget {
@@ -13,22 +14,28 @@ class StartApp extends StatefulWidget {
 }
 
 class _StartAppState extends State<StartApp> {
-  final InitialLoadingController _initialLoadingController = Get.put(
-    InitialLoadingController(),
-  );
-  final ApproveActionsController _approveActionsController = Get.put(
-    ApproveActionsController(),
-  );
-
   @override
   void initState() {
     super.initState();
-    _initialLoadingController.initialize();
-    _approveActionsController.initialize();
+    initControllers();
   }
 
   @override
   Widget build(BuildContext context) {
     return const InitialPage();
   }
+}
+
+initControllers() async {
+  final InitialLoadingController initialLoadingController = Get.put(
+    InitialLoadingController(),
+  );
+  final ApproveActionsController approveActionsController = Get.put(
+    ApproveActionsController(),
+  );
+
+  final NewPaymentController newPaymentController =
+      Get.put(NewPaymentController());
+  initialLoadingController.initialize();
+  approveActionsController.initialize();
 }

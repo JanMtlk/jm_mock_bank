@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:jm_mock_bank/presentation/start_app.dart';
+import 'package:jm_mock_bank/presentation/core/start_app/start_app.dart';
 
 void main() {
   runApp(const MyApp());

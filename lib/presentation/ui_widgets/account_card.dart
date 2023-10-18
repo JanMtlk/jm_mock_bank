@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:jm_mock_bank/presentation/home_page.dart';
+import 'package:jm_mock_bank/presentation/core/home_page.dart';
 import 'package:jm_mock_bank/presentation/single_pages/account_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/jmm_forward_icon.dart';

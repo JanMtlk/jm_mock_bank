@@ -6,6 +6,7 @@ part 'auth_state_state.dart';
 
 class AuthStateController extends GetxController {
   AuthState authState = const AuthStateInitial();
+  String password = "";
 
   void login({required String password}) async {
     // Logger().i("Auth loging in");
@@ -21,9 +22,22 @@ class AuthStateController extends GetxController {
             message: "Please try again",
             duration: Duration(seconds: 2)));
         authState = const AuthStateError(message: "Wrong password");
+        password = "";
       }
       update();
       // Logger().i("new auth state ${authState.runtimeType}");
     });
+  }
+
+  void updatePassword({required String password}) {
+    _checkPassword(password: password);
+    this.password = password;
+    update();
+  }
+
+  _checkPassword({required String password}) {
+    if (password.length == 4) {
+      login(password: password);
+    }
   }
 }

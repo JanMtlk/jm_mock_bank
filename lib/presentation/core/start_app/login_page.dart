@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jm_mock_bank/application/state/auth_state/auth_state_controller.dart';
-import 'package:jm_mock_bank/presentation/home_page.dart';
+import 'package:jm_mock_bank/presentation/core/home_page.dart';
 import 'package:logger/logger.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,9 +15,6 @@ class _LoginPageState extends State<LoginPage> {
   final controller = Get.put(AuthStateController());
   String password = "";
   void onPressed(int index) {
-    if (password.length == 4) {
-      return;
-    }
     // Logger().i(index);
     if (index == 9) {
       // show alertbox
@@ -36,13 +33,7 @@ class _LoginPageState extends State<LoginPage> {
         password = "$password${index + 1}";
       });
     }
-    if (password.length == 4) {
-      // check password
-      // if correct, go to home page
-      // else, show alertbox
-      Logger().d("calling login event");
-      controller.login(password: password);
-    }
+    controller.updatePassword(password: password);
   }
 
   @override
