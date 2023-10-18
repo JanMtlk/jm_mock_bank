@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jm_mock_bank/application/blocks/auth_state/auth_state_bloc.dart';
+import 'package:get/get.dart';
+import 'package:jm_mock_bank/application/state/auth_state/auth_state_controller.dart';
 import 'package:jm_mock_bank/presentation/home_page.dart';
 import 'package:logger/logger.dart';
 
@@ -12,8 +12,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final controller = Get.put(AuthStateController());
   String password = "";
-  void onPressed(int index) async {
+  void onPressed(int index) {
+    if (password.length == 4) {
+      return;
+    }
     // Logger().i(index);
     if (index == 9) {
       // show alertbox
@@ -37,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       // if correct, go to home page
       // else, show alertbox
       Logger().d("calling login event");
-      context.read<AuthBloc>().add(LoginEvent(password: password));
+      controller.login(password: password);
     }
   }
 
@@ -45,29 +49,37 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthStateAuthenticated) {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const HomePage()));
-          }
-        },
-        builder: (context, state) {
-          if (state is AuthStateLoading || state is AuthStateAuthenticated) {
-            return const CircularProgressIndicator();
-          }
-
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text("Enter your password"),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: 30,
-                child: Row(
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+          const Text("Enter your password"),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: 30,
+            child: GetBuilder<AuthStateController>(builder: (_) {
+              if (controller.authState is AuthStateError) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  // clear password
+                  setState(() {
+                    password = "";
+                  });
+                  controller.authState = const AuthStateInitial();
+                  controller.update();
+                });
+                return const CircularProgressIndicator();
+              }
+              if (controller.authState is AuthStateLoading) {
+                return const CircularProgressIndicator();
+              } else if (controller.authState is AuthStateAuthenticated) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Get.offAll(() => const HomePage());
+                });
+                return const CircularProgressIndicator();
+              } else {
+                return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     for (int i = 0; i < password.length; i++)
@@ -82,48 +94,45 @@ class _LoginPageState extends State<LoginPage> {
                                 const BorderRadius.all(Radius.circular(100))),
                       ),
                   ],
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: GridView.builder(
-                    shrinkWrap: true,
-                    itemCount: 12,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                    itemBuilder: (context, index) {
-                      Widget child;
-                      if (index == 10) {
-                        child = const Text("0");
-                      } else if (index == 9) {
-                        child = const Icon(Icons.fingerprint, size: 40);
-                      } else if (index == 11) {
-                        child = const Icon(Icons.backspace, size: 25);
-                      } else {
-                        child = GestureDetector(child: Text("${index + 1}"));
-                      }
-                      return GestureDetector(
-                        onTap: () {
-                          onPressed(index);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(color: Colors.grey),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(100)),
-                          ),
-                          child: Center(child: child),
-                        ),
-                      );
-                    }),
-              ),
-            ],
-          );
-        },
-      ),
-    ));
+                );
+              }
+            }),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: GridView.builder(
+                shrinkWrap: true,
+                itemCount: 12,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
+                itemBuilder: (context, index) {
+                  Widget child;
+                  if (index == 10) {
+                    child = const Text("0");
+                  } else if (index == 9) {
+                    child = const Icon(Icons.fingerprint, size: 40);
+                  } else if (index == 11) {
+                    child = const Icon(Icons.backspace, size: 25);
+                  } else {
+                    child = GestureDetector(child: Text("${index + 1}"));
+                  }
+                  return GestureDetector(
+                    onTap: () {
+                      onPressed(index);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        border: Border.all(color: Colors.grey),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(100)),
+                      ),
+                      child: Center(child: child),
+                    ),
+                  );
+                }),
+          ),
+        ])));
   }
 }

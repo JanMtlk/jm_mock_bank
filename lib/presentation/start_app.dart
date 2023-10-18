@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jm_mock_bank/application/blocks/approve_actions/approve_actions_bloc.dart';
-import 'package:jm_mock_bank/application/blocks/auth_state/auth_state_bloc.dart';
-import 'package:jm_mock_bank/application/blocks/initial_loading/initial_loading_bloc.dart';
+import 'package:get/get.dart';
+import 'package:jm_mock_bank/application/state/approve_actions/approve_actions_controller.dart';
+import 'package:jm_mock_bank/application/state/initial_loading/initial_loading_controller.dart';
 import 'package:jm_mock_bank/presentation/initial_page.dart';
+// import 'package:logger/logger.dart';
 
 class StartApp extends StatefulWidget {
   const StartApp({super.key});
@@ -13,21 +13,22 @@ class StartApp extends StatefulWidget {
 }
 
 class _StartAppState extends State<StartApp> {
+  final InitialLoadingController _initialLoadingController = Get.put(
+    InitialLoadingController(),
+  );
+  final ApproveActionsController _approveActionsController = Get.put(
+    ApproveActionsController(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _initialLoadingController.initialize();
+    _approveActionsController.initialize();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => InitialLoadingBloc(),
-        ),
-        BlocProvider(
-          create: (context) => AuthBloc(),
-        ),
-        BlocProvider(
-          create: (context) => ApproveActionsBloc(),
-        ),
-      ],
-      child: const InitialPage(),
-    );
+    return const InitialPage();
   }
 }

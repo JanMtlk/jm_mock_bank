@@ -1,10 +1,7 @@
-part of 'approve_actions_bloc.dart';
+part of 'approve_actions_controller.dart';
 
-sealed class ApproveActionsState extends Equatable {
+sealed class ApproveActionsState {
   const ApproveActionsState();
-
-  @override
-  List<Object> get props => [];
 }
 
 final class ApproveActionsInitial extends ApproveActionsState {
@@ -16,10 +13,7 @@ final class ApproveActionsLoading extends ApproveActionsState {
 }
 
 final class ApproveActionsLoaded extends ApproveActionsState {
-  final List<Object> actionsList;
+  final List<String> actionsList;
 
   const ApproveActionsLoaded({required this.actionsList});
-
-  @override
-  List<Object> get props => [actionsList];
 }

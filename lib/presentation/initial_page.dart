@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jm_mock_bank/application/blocks/initial_loading/initial_loading_bloc.dart';
-import 'package:jm_mock_bank/application/blocks/initial_loading/initial_loading_event.dart';
-import 'package:jm_mock_bank/presentation/error_page.dart';
+import 'package:get/get.dart';
+import 'package:jm_mock_bank/application/state/initial_loading/initial_loading_controller.dart';
 import 'package:jm_mock_bank/presentation/login_page.dart';
+import 'package:logger/logger.dart';
 
-class InitialPage extends StatelessWidget {
+class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
 
   @override
+  State<InitialPage> createState() => _InitialPageState();
+}
+
+class _InitialPageState extends State<InitialPage> {
+  final controller = Get.put(InitialLoadingController());
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InitialLoadingBloc, InitialLoadingState>(
-      bloc: InitialLoadingBloc()..add(const InitialLoadingStarted()),
-      builder: (context, state) {
-        if (state is InitialLoadingLoaded) {
-          return const LoginPage();
-        }
-        if (state is InitialLoadingLoading) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        } else {
-          return const ErrorPage();
-        }
-      },
-    );
+    // handle loading of data from storage
+    return GetBuilder<InitialLoadingController>(builder: (_) {
+      Logger().i("rebuilding with ${controller.loadingState}");
+      if (controller.loadingState is InitialLoadingInitial) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (controller.loadingState is InitialLoadingLoading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (controller.loadingState is InitialLoadingLoaded) {
+        return const LoginPage();
+      } else {
+        return const Center(
+          child: Text("Error"),
+        );
+      }
+    });
   }
 }

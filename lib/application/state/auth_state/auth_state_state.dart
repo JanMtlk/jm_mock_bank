@@ -1,4 +1,4 @@
-part of 'auth_state_bloc.dart';
+part of 'auth_state_controller.dart';
 
 @immutable
 sealed class AuthState {

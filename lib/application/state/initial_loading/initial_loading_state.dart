@@ -1,7 +1,13 @@
-part of 'initial_loading_bloc.dart';
+part of 'initial_loading_controller.dart';
 
 sealed class InitialLoadingState extends Equatable {
   const InitialLoadingState();
+}
+
+final class InitialLoadingInitial extends InitialLoadingState {
+  const InitialLoadingInitial();
+  @override
+  List<Object?> get props => [];
 }
 
 final class InitialLoadingLoading extends InitialLoadingState {
