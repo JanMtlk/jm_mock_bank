@@ -8,7 +8,8 @@ import 'package:jm_mock_bank/presentation/single_pages/approve_actions_page.dart
 import 'package:jm_mock_bank/presentation/profile_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final int startingIndex;
+  const HomePage({super.key, this.startingIndex = 0});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,10 +23,12 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    _currentIndex = widget.startingIndex;
     _tabController = TabController(
       length: 5, // Number of tabs
       vsync: this, // Add a TickerProvider
     );
+    _tabController?.animateTo(widget.startingIndex);
   }
 
   @override

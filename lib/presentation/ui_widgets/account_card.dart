@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:jm_mock_bank/presentation/home_page.dart';
+import 'package:jm_mock_bank/presentation/single_pages/account_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/jmm_forward_icon.dart';
 import 'package:jm_mock_bank/utils/constants.dart';
+import 'package:logger/logger.dart';
 
 class AccountCard extends StatelessWidget {
   const AccountCard({super.key});
@@ -10,13 +14,16 @@ class AccountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Contained(
-      child: Card(
-        shadowColor: Colors.purpleAccent,
-        elevation: 2,
-        child: Column(
-          children: [
-            Container(
-              child: Contained(
+      child: GestureDetector(
+        onTap: () {
+          Get.to(() => const AccountPage());
+        },
+        child: Card(
+          shadowColor: Colors.purpleAccent,
+          elevation: 2,
+          child: Column(
+            children: [
+              Contained(
                 child: Row(children: [
                   const Expanded(
                     child: Text(
@@ -45,9 +52,7 @@ class AccountCard extends StatelessWidget {
                   ),
                 ]),
               ),
-            ),
-            Container(
-              child: Contained(
+              Contained(
                 child: Column(children: [
                   const Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -108,7 +113,11 @@ class AccountCard extends StatelessWidget {
                             Text('Payment'),
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Logger().i("Payment button pressed");
+                          Get.offAll(() => const HomePage(startingIndex: 1),
+                              transition: Transition.fadeIn);
+                        },
                       ),
                       const SizedBox(
                         width: 10,
@@ -123,48 +132,50 @@ class AccountCard extends StatelessWidget {
                             Text('history'),
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => const AccountPage());
+                        },
                       ),
                     ],
                   ),
                 ]),
               ),
-            ),
-            Container(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                  // backgroundColor: MaterialStateProperty.all(Colors.white),
-                  //the style should be that on bottom, there is radius of 10 on bottomleft and bottomRight and on top 0
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
+              Container(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+                    // backgroundColor: MaterialStateProperty.all(Colors.white),
+                    //the style should be that on bottom, there is radius of 10 on bottomleft and bottomRight and on top 0
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                onPressed: () {
-                  //TODO: add redirect to OfferPage
-                },
-                child: const Contained(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Personalized offer with allowed overdraft \nup to 100 000 CZK",
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w300),
+                  onPressed: () {
+                    //TODO: add redirect to OfferPage
+                  },
+                  child: const Contained(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Personalized offer with allowed overdraft \nup to 100 000 CZK",
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w300),
+                            ),
                           ),
-                        ),
-                        JmmForwardIcon(size: 20)
-                      ]),
+                          JmmForwardIcon(size: 20)
+                        ]),
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
