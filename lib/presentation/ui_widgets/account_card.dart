@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:jm_mock_bank/application/state/accounts/accounts_controller.dart';
 import 'package:jm_mock_bank/presentation/core/home_page.dart';
 import 'package:jm_mock_bank/presentation/single_pages/account_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
@@ -9,7 +10,8 @@ import 'package:jm_mock_bank/utils/constants.dart';
 import 'package:logger/logger.dart';
 
 class AccountCard extends StatelessWidget {
-  const AccountCard({super.key});
+  final Account account;
+  const AccountCard({super.key, required this.account});
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +27,18 @@ class AccountCard extends StatelessWidget {
             children: [
               Contained(
                 child: Row(children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      "Basic personal account",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      account.accountName,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                   GestureDetector(
                     onLongPress: () {
                       // Copy text to clipboard
-                      String text = "1234567891/1234";
-                      Clipboard.setData(ClipboardData(text: text));
+                      Clipboard.setData(
+                          ClipboardData(text: account.accountName));
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           showCloseIcon: true,
@@ -44,48 +46,48 @@ class AccountCard extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text(
-                      "1234567891/1234",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                    child: Text(
+                      account.accountNumber,
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w300),
                     ),
                   ),
                 ]),
               ),
               Contained(
                 child: Column(children: [
-                  const Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "2 312",
-                        style: TextStyle(
+                        account.accountBalance.floor().toString(),
+                        style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(bottom: 1.0),
+                        padding: const EdgeInsets.only(bottom: 1.0),
                         child: Text(
-                          ",40",
-                          style: TextStyle(
+                          ",${(account.accountBalance % 1).toString().length > 3 ? (account.accountBalance % 1).toString().substring(2, 4) : "00"} ",
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "CZK",
-                        style: TextStyle(
+                        account.accountCurrency.name,
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      Icon(Icons.seven_k_plus_sharp),
-                      SizedBox(
+                      const Icon(Icons.seven_k_plus_sharp),
+                      const SizedBox(
                         width: 10,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.keyboard_arrow_down,
                         size: 30,
                         color: Colors.purple,

@@ -1,30 +1,41 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+// void main() {
+//   group('Account', () {
+//     test('can be created with a name and balance', () {
+//       final account = Account(name: 'John Doe', balance: 100);
 
-import 'package:jm_mock_bank/main.dart';
+//       expect(account.name, 'John Doe');
+//       expect(account.balance, 100);
+//     });
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+//     test('can deposit money', () {
+//       final account = Account(name: 'John Doe', balance: 100);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+//       account.deposit(50);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+//       expect(account.balance, 150);
+//     });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
-}
+//     test('can withdraw money', () {
+//       final account = Account(name: 'John Doe', balance: 100);
+
+//       account.withdraw(50);
+
+//       expect(account.balance, 50);
+//     });
+//   });
+//   group('jm_mock_bank app', () {
+//     test('can create an account', () {
+//       // Test that the user can create a new account by entering a valid name and email address.
+
+//       // ...
+//     });
+
+//     test('can transfer money', () {
+//       // Test that the user can transfer money from one account to another by entering valid account numbers and amounts.
+
+//       // ...
+//     });
+//   });
+// }

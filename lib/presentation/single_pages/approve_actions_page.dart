@@ -11,17 +11,13 @@ class ApproveActionsPage extends StatefulWidget {
 }
 
 class _ApproveActionsPageState extends State<ApproveActionsPage> {
-  final ApproveActionsController _approveActionsController = Get.put(
-    ApproveActionsController(),
-  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("JMM Key"),
       ),
-      body: GetBuilder(
-        init: _approveActionsController,
+      body: GetBuilder<ApproveActionsController>(
         builder: (controller) {
           if (controller.approveActionsState is ApproveActionsLoaded) {
             final List<String> approveActions =

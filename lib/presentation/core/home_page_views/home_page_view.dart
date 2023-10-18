@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jm_mock_bank/application/state/accounts/accounts_controller.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/account_card.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/card_card.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/offer_card.dart';
@@ -8,12 +10,15 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        AccountCard(),
-        OfferCard(),
-        CardCard(),
-      ],
+    return GetBuilder<AccountsController>(
+      builder: (accountsController) => ListView(
+        children: [
+          for (var account in accountsController.accountsList)
+            AccountCard(account: account),
+          const OfferCard(),
+          const CardCard(),
+        ],
+      ),
     );
   }
 }

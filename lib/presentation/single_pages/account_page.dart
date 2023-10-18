@@ -14,7 +14,7 @@ class AccountPage extends StatelessWidget {
           ),
           body: ListView(
             children: [
-              const AccountCard(),
+              // const AccountCard(),
               const TabBar(isScrollable: true, tabs: [
                 Tab(text: "Overview"),
                 Tab(text: "Transactions"),

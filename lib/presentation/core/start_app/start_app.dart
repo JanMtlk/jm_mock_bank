@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jm_mock_bank/application/state/accounts/accounts_controller.dart';
 import 'package:jm_mock_bank/application/state/approve_actions/approve_actions_controller.dart';
 import 'package:jm_mock_bank/application/state/initial_loading/initial_loading_controller.dart';
 import 'package:jm_mock_bank/application/state/new_payment_controller.dart';
@@ -34,6 +35,10 @@ initControllers() async {
   );
 
   Get.put(NewPaymentController());
+  final AccountsController accountsController = Get.put(
+    AccountsController(),
+  );
+  accountsController.initialize();
   initialLoadingController.initialize();
   approveActionsController.initialize();
 }
