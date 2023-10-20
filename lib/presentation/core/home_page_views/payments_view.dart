@@ -88,7 +88,7 @@ class PaymentsView extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => NewPaymentPage(),
+                              builder: (context) => const NewPaymentPage(),
                             ),
                           );
                         },

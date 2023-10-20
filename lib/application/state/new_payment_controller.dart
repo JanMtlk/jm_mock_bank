@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:jm_mock_bank/application/state/accounts/accounts_controller.dart';
 
 class NewPaymentController extends GetxController {
   //fromAccount is the one selected in account controller
@@ -41,9 +40,7 @@ class NewPaymentController extends GetxController {
     if (receiverMessageController.text.isEmpty) {
       errors.add("Message is empty");
     }
-    if (dueDate == null) {
-      errors.add("Date is empty");
-    }
+
     return errors;
   }
 

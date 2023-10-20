@@ -218,13 +218,9 @@ class _NewPaymentPageState extends State<NewPaymentPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                            newPaymentController.dueDate == null
-                                                ? 'Due date'
-                                                : newPaymentController.dueDate
-                                                        .toIso8601String()
-                                                        .substring(0, 10) ??
-                                                    ''),
+                                        Text(newPaymentController.dueDate
+                                            .toIso8601String()
+                                            .substring(0, 10)),
                                         const Icon(Icons.calendar_today)
                                       ],
                                     ),

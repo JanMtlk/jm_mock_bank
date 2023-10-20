@@ -1,4 +1,4 @@
-class transaction {
+class Transaction {
   String id;
   String name;
   String description;
@@ -14,7 +14,7 @@ class transaction {
   String? updatedAt;
   String? deletedAt;
 
-  transaction({
+  Transaction({
     required this.id,
     required this.name,
     required this.description,
@@ -31,8 +31,8 @@ class transaction {
     required this.deletedAt,
   });
 
-  factory transaction.fromJson(Map<String, dynamic> json) {
-    return transaction(
+  factory Transaction.fromJson(Map<String, dynamic> json) {
+    return Transaction(
       id: json['id'],
       name: json['name'],
       description: json['description'],

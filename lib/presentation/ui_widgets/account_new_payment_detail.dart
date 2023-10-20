@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jm_mock_bank/application/state/accounts/accounts_controller.dart';
 
 class AccountNewPaymentDetail extends StatelessWidget {

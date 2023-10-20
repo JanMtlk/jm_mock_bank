@@ -167,38 +167,36 @@ class AccountCard extends StatelessWidget {
                   ),
                 ]),
               ),
-              Container(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                    // backgroundColor: MaterialStateProperty.all(Colors.white),
-                    //the style should be that on bottom, there is radius of 10 on bottomleft and bottomRight and on top 0
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+                  // backgroundColor: MaterialStateProperty.all(Colors.white),
+                  //the style should be that on bottom, there is radius of 10 on bottomleft and bottomRight and on top 0
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    //TODO: add redirect to OfferPage
-                  },
-                  child: const Contained(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Personalized offer with allowed overdraft \nup to 100 000 CZK",
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w300),
-                            ),
+                ),
+                onPressed: () {
+                  //TODO: add redirect to OfferPage
+                },
+                child: const Contained(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Personalized offer with allowed overdraft \nup to 100 000 CZK",
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.w300),
                           ),
-                          JmmForwardIcon(size: 20)
-                        ]),
-                  ),
+                        ),
+                        JmmForwardIcon(size: 20)
+                      ]),
                 ),
               )
             ],
