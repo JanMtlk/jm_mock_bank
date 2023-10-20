@@ -1,10 +1,18 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:jm_mock_bank/application/state/new_payment_controller.dart';
+import 'package:logger/logger.dart';
 
 class AccountsController extends GetxController {
   AccountsState accountsState = AccountsState.initial;
   List<Account> accountsList = [];
+  int selectedAccountIndex = 0;
+  @override
+  void onInit() {
+    initialize();
+    super.onInit();
+  }
 
   void initialize() async {
     // Logger().i("accounts init");
@@ -32,10 +40,19 @@ class AccountsController extends GetxController {
           accountBranch: "Brno",
         ),
       ];
+      //place for logic to get the main account that user uses for payments when he goes straight into payments
+      selectedAccountIndex = 0;
       accountsState = AccountsState.loaded;
+
       update();
       // Logger().i("new auth state ${accountsState.runtimeType}");
     });
+  }
+
+  void setSelectedAccountIndex(int indexOf) {
+    // Logger().i("setSelectedAccountIndex $indexOf");
+    selectedAccountIndex = indexOf;
+    update();
   }
 }
 

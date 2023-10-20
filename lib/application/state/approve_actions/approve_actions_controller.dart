@@ -6,6 +6,11 @@ part 'approve_actions_state.dart';
 
 class ApproveActionsController extends GetxController {
   ApproveActionsState approveActionsState = const ApproveActionsInitial();
+  @override
+  void onInit() {
+    initialize();
+    super.onInit();
+  }
 
   void initialize() async {
     // Logger().i("approve actions init");

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jm_mock_bank/application/state/approve_actions/approve_actions_controller.dart';
+import 'package:jm_mock_bank/presentation/core/universal/jmmb_loader.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
 
 class ApproveActionsPage extends StatefulWidget {
@@ -65,7 +66,7 @@ class _ApproveActionsPageState extends State<ApproveActionsPage> {
             );
           } else {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: JMMBLoader(),
             );
           }
         },

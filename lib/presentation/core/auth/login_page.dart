@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jm_mock_bank/application/state/auth_state/auth_state_controller.dart';
 import 'package:jm_mock_bank/presentation/core/home_page.dart';
+import 'package:jm_mock_bank/presentation/core/universal/jmmb_loader.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,27 +13,28 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final controller = Get.put(AuthStateController());
-  String password = "";
   void onPressed(int index) {
     // Logger().i(index);
-    if (index == 9) {
-      // show alertbox
-    } else if (index == 11) {
-      if (password.isNotEmpty) {
-        setState(() {
-          password = password.substring(0, password.length - 1);
-        });
+    if (controller.passwordField.length < 4) {
+      if (index == 9) {
+        // show alertbox
+      } else if (index == 11) {
+        if (controller.passwordField.isNotEmpty) {
+          controller.passwordField = controller.passwordField
+              .substring(0, controller.passwordField.length - 1);
+          controller.update();
+        }
+      } else if (index == 10) {
+        controller.passwordField = "${controller.passwordField}0";
+        controller.update();
+      } else {
+        controller.passwordField = "${controller.passwordField}${index + 1}";
+        controller.update();
       }
-    } else if (index == 10) {
-      setState(() {
-        password = "${password}0";
-      });
-    } else {
-      setState(() {
-        password = "$password${index + 1}";
-      });
+      if (controller.passwordField.length == 4) {
+        controller.login();
+      }
     }
-    controller.updatePassword(password: password);
   }
 
   @override
@@ -50,29 +52,26 @@ class _LoginPageState extends State<LoginPage> {
             width: MediaQuery.of(context).size.width * 0.7,
             height: 30,
             child: GetBuilder<AuthStateController>(builder: (_) {
-              if (controller.authState is AuthStateError) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  // clear password
-                  setState(() {
-                    password = "";
+              if (controller.authState is AuthStateLoading ||
+                  controller.authState is AuthStateAuthenticated) {
+                if (controller.authState is AuthStateAuthenticated) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Get.offAll(() => const HomePage());
                   });
-                  controller.authState = const AuthStateInitial();
-                  controller.update();
-                });
-                return const CircularProgressIndicator();
-              }
-              if (controller.authState is AuthStateLoading) {
-                return const CircularProgressIndicator();
-              } else if (controller.authState is AuthStateAuthenticated) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Get.offAll(() => const HomePage());
-                });
-                return const CircularProgressIndicator();
+                }
+                return const Center(
+                  child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: JMMBLoader(
+                        size: 20,
+                      )),
+                );
               } else {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for (int i = 0; i < password.length; i++)
+                    for (int i = 0; i < controller.passwordField.length; i++)
                       Container(
                         height: 20,
                         width: 20,

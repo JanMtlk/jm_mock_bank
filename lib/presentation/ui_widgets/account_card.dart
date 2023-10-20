@@ -7,18 +7,26 @@ import 'package:jm_mock_bank/presentation/single_pages/account_page.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/contained.dart';
 import 'package:jm_mock_bank/presentation/ui_widgets/jmm_forward_icon.dart';
 import 'package:jm_mock_bank/utils/constants.dart';
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 
 class AccountCard extends StatelessWidget {
   final Account account;
-  const AccountCard({super.key, required this.account});
+  final bool isSelected;
+  const AccountCard(
+      {super.key, required this.account, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
     return Contained(
       child: GestureDetector(
         onTap: () {
-          Get.to(() => const AccountPage());
+          if (!isSelected) {
+            Get.to(() => const AccountPage());
+            Get.put(AccountsController()).setSelectedAccountIndex(
+                Get.find<AccountsController>().accountsList.indexOf(account));
+          } else {
+            // Logger().i("Account is already selected");
+          }
         },
         child: Card(
           shadowColor: Colors.purpleAccent,
@@ -116,7 +124,11 @@ class AccountCard extends StatelessWidget {
                           ],
                         ),
                         onPressed: () {
-                          Logger().i("Payment button pressed");
+                          // Logger().i("Payment button pressed");
+                          Get.put(AccountsController()).setSelectedAccountIndex(
+                              Get.find<AccountsController>()
+                                  .accountsList
+                                  .indexOf(account));
                           Get.offAll(() => const HomePage(startingIndex: 1),
                               transition: Transition.fadeIn);
                         },
@@ -124,20 +136,33 @@ class AccountCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      ElevatedButton(
-                        child: const Row(
-                          children: [
-                            Icon(Icons.history),
-                            SizedBox(
-                              width: 5,
+                      isSelected
+                          ? const ElevatedButton(
+                              onPressed: null,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.history),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('JMMB Exchange X'),
+                                ],
+                              ),
+                            )
+                          : ElevatedButton(
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.history),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('history'),
+                                ],
+                              ),
+                              onPressed: () {
+                                Get.to(() => const AccountPage());
+                              },
                             ),
-                            Text('history'),
-                          ],
-                        ),
-                        onPressed: () {
-                          Get.to(() => const AccountPage());
-                        },
-                      ),
                     ],
                   ),
                 ]),
