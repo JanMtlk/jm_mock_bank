@@ -1,8 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:jm_mock_bank/application/state/new_payment_controller.dart';
-import 'package:logger/logger.dart';
 
 class AccountsController extends GetxController {
   AccountsState accountsState = AccountsState.initial;
